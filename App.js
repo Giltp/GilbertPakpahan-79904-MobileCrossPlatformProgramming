@@ -1,35 +1,26 @@
-import React from 'react';
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, View } from 'react-native';
-import { Provider as PaperProvider, DefaultTheme } from 'react-native-paper';
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import Email from './Lab Weeks/Week 5/Lab/Email';
-import HomeScreen from './Lab Weeks/Week 5/Lab/HomeScreen';
-import UserList from './Lab Weeks/Week 5/Lab/UserList';
-import Profile from './Lab Weeks/Week 5/Lab/Profile';
-import Meet6_Latih1 from './Lab Weeks/Week 6/Meet6_Lath1';
-import Meet5_Home from './Lab Weeks/Week 5/Meet5_Home';
-import Meet5_Profile from './Lab Weeks/Week 5/Meet5_Profile';
-
-const Stack  = createNativeStackNavigator();
+import React, { useState } from "react";
+import { View, Text, StyleSheet } from "react-native";
+import Input from "./Lab Weeks/Week 6/Lab/Input";
 
 export default function App() {
+  const [name, setName] = useState("");
+  const [nim, setNim] = useState("");
+
   return (
-    <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen name="Home" component={HomeScreen} />
-        <Stack.Screen name="Email" component={Email} />
-        <Stack.Screen name="UserList" component={UserList} />
-        <Stack.Screen name="Profile" component={Profile} />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <View style={styles.container}>
+      <Text>{name || "Your Name"} - {nim || "00000000000"}</Text>
+      <Input label="Name" value={name} onChangeText={setName} />
+      <Input label="NIM" value={nim} onChangeText={setNim} keyboardType="numeric" />
+    </View>
   );
-};
+}
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f7f7f7',
+    backgroundColor: "#FFFAF7",
+    alignItems: "center",
+    justifyContent: "center",
+    padding: 20,
   },
 });
