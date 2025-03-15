@@ -1,0 +1,31 @@
+import { StatusBar } from 'expo-status-bar';
+import { StyleSheet, Text, View } from 'react-native';
+import Counter from './Lab Weeks/Week 3/Counter';
+import { useState } from 'react';
+import Profile from './Lab Weeks/Week 3/Profile';
+import Meet4_1 from './Lab Weeks/Week 4/Meet4_1';
+import Meet4_Card from './Lab Weeks/Week 4/Meet4_Card';
+import Meet4_Useref from './Lab Weeks/Week 4/Meet4_Useref';
+
+export default function App() {
+  return (
+    <View style={styles.container}>
+      {/*<Profile />*/}
+      <Meet4_1 />
+      <Meet4_Card teksJudul={"Ini Judul Pertama"} teksIsi={"Lorem Ipsum Dolor Sit Amet"} warna={"#FFF0FF"}/>
+      <Meet4_Card teksJudul={"Ini Judul Kedua"} teksIsi={"Lorem Ipsum Dolor Sit Amet"} warna={"#FFFFF0"}/>
+      <Meet4_Useref />
+      {/*<Meet4_Card teksJudul={"Ini Judul Ketiga"} teksIsi={"Lorem Ipsum Dolor Sit Amet"} warna={"#F0FFFF"}/>
+      <Meet4_Card teksJudul={"Ini Judul Keempat"} teksIsi={"Lorem Ipsum Dolor Sit Amet"} warna={"#F0F0FF"}/>
+      <Meet4_Card teksJudul={"Ini Judul Kelima"} teksIsi={"Lorem Ipsum Dolor Sit Amet"} warna={"#FFF0F0"}/>*/}
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+  },
+});

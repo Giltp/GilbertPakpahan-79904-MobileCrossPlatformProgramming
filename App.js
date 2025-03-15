@@ -1,20 +1,35 @@
+import React from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
+import { Provider as PaperProvider, DefaultTheme } from 'react-native-paper';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import Email from './Lab Weeks/Week 5/Lab/Email';
+import HomeScreen from './Lab Weeks/Week 5/Lab/HomeScreen';
+import UserList from './Lab Weeks/Week 5/Lab/UserList';
+import Profile from './Lab Weeks/Week 5/Lab/Profile';
+import Meet6_Latih1 from './Lab Weeks/Week 6/Meet6_Lath1';
+import Meet5_Home from './Lab Weeks/Week 5/Meet5_Home';
+import Meet5_Profile from './Lab Weeks/Week 5/Meet5_Profile';
+
+const Stack  = createNativeStackNavigator();
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen name="Home" component={HomeScreen} />
+        <Stack.Screen name="Email" component={Email} />
+        <Stack.Screen name="UserList" component={UserList} />
+        <Stack.Screen name="Profile" component={Profile} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: '#f7f7f7',
   },
 });

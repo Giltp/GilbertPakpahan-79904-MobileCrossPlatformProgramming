@@ -1,0 +1,63 @@
+import React from "react";
+import { StatusBar } from "expo-status-bar";
+import { SafeAreaView, View, Text, StyleSheet } from "react-native";
+import Meet5_Home from "./Lab Weeks/Week 5/Meet5_Home";
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import Meet5_Profile from "./Lab Weeks/Week 5/Meet5_Profile";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { createDrawerNavigator } from "@react-navigation/drawer";
+
+const Stack  = createNativeStackNavigator();
+const Tab = createBottomTabNavigator();
+const Drawer = createDrawerNavigator();
+
+export default function App(){
+  return(
+    //<NavigasiBiasa />
+    //<NavigasiBottom />
+    <NavigasiDrawer />
+  )
+};
+
+const NavigasiDrawer = () => {
+  return(
+    <NavigationContainer>
+      <Drawer.Navigator>
+        <Drawer.Screen name="Home" component={Meet5_Home} />
+        <Drawer.Screen name="Profile" component={Meet5_Profile} />
+      </Drawer.Navigator>
+    </NavigationContainer>
+  )
+}
+
+const NavigasiBottom = () => {
+  return(
+    <NavigationContainer>
+      <Tab.Navigator>
+      <Tab.Screen name="Home" component={Meet5_Home} />
+      <Tab.Screen name="Profile" component={Meet5_Profile} />
+    </Tab.Navigator>
+    </NavigationContainer>
+  )
+}
+
+const NavigasiBiasa = () => {
+  return (
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen name="Home" component={Meet5_Home} />
+        <Stack.screen name="Profile" component={Meet5_Profile} />
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+};
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+});
