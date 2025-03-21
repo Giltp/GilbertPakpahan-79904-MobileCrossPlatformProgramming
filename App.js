@@ -1,18 +1,27 @@
 import React, { useState } from "react";
 import { View, Text, StyleSheet } from "react-native";
-import Input from "./Lab Weeks/Week 6/Lab/Input";
+import Meet7_latih1 from "./Lab Weeks/Week 7/Meet7_Lat1";
+import HomeScreen from "./Lab Weeks/Week 5/Lab/HomeScreen";
+import { createDrawerNavigator } from "@react-navigation/drawer";
+import { NavigationContainer } from "@react-navigation/native";
+
+const Drawer = createDrawerNavigator();
 
 export default function App() {
-  const [name, setName] = useState("");
-  const [nim, setNim] = useState("");
-
   return (
-    <View style={styles.container}>
-      <Text>{name || "Your Name"} - {nim || "00000000000"}</Text>
-      <Input label="Name" value={name} onChangeText={setName} />
-      <Input label="NIM" value={nim} onChangeText={setNim} keyboardType="numeric" />
-    </View>
+    <NavigasiDrawer />
   );
+};
+
+const NavigasiDrawer = () => {
+  return(
+    <NavigationContainer>
+      <Drawer.Navigator>
+      <Drawer.Screen name="Home" component={HomeScreen} />
+        <Drawer.Screen name="Meet 7" component={Meet7_latih1} />
+      </Drawer.Navigator>
+    </NavigationContainer>
+  )
 }
 
 const styles = StyleSheet.create({
