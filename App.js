@@ -1,32 +1,82 @@
-import React from 'react';
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, View } from 'react-native';
-import { Provider as PaperProvider, DefaultTheme } from 'react-native-paper';
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import Email from './Weeks/Week 5/Lab/Email';
-import HomeScreen from './Weeks/Week 5/Lab/HomeScreen';
-import UserList from './Weeks/Week 5/Lab/UserList';
-import Profile from './Weeks/Week 5/Lab/Profile';
+import React, { useEffect, useState } from "react";
+import { StyleSheet, View, Text, FlatList, TouchableOpacity } from "react-native";
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { getPosts } from "./Weeks/Week 8/Axios";
+import Forms from "./Weeks/Week 8/Forms";
 
-const Stack  = createNativeStackNavigator();
+const Stack = createNativeStackNavigator();
+
+const HomeScreen = ({ navigation }) => {
+  const [posts, setPosts] = useState([]);
+
+  useEffect(() => {
+    fetchPosts();
+  }, []);
+
+  const fetchPosts = () => {
+    getPosts()
+      .then((res) => {
+        if (res.status === 200) {
+          setPosts(res.data);
+        }
+      })
+      .catch((err) => {
+        console.error("Failed to fetch posts:", err);
+      });
+  };
+
+  const renderItem = ({ item }) => (
+    <TouchableOpacity
+      style={styles.card}
+      onPress={() => navigation.navigate("Forms", { post: item, refresh: fetchPosts })}
+    >
+      <Text style={styles.title}>{item.title}</Text>
+      <Text>{item.body}</Text>
+    </TouchableOpacity>
+  );
+
+  return (
+    <View style={styles.container}>
+      <Text style={styles.header}>Daftar Posts</Text>
+      <FlatList
+        data={posts}
+        keyExtractor={(item) => item.id.toString()}
+        renderItem={renderItem}
+      />
+    </View>
+  );
+};
 
 export default function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator>
+      <Stack.Navigator initialRouteName="Home">
         <Stack.Screen name="Home" component={HomeScreen} />
-        <Stack.Screen name="Email" component={Email} />
-        <Stack.Screen name="UserList" component={UserList} />
-        <Stack.Screen name="Profile" component={Profile} />
+        <Stack.Screen name="Forms" component={Forms} />
       </Stack.Navigator>
     </NavigationContainer>
   );
-};
+}
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f7f7f7',
+    padding: 16,
+  },
+  header: {
+    fontSize: 24,
+    marginBottom: 16,
+  },
+  card: {
+    backgroundColor: "#f9f9f9",
+    padding: 16,
+    marginBottom: 12,
+    borderRadius: 8,
+    elevation: 2,
+  },
+  title: {
+    fontWeight: "bold",
+    marginBottom: 8,
   },
 });
