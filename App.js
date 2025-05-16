@@ -1,82 +1,31 @@
-import React, { useEffect, useState } from "react";
-import { StyleSheet, View, Text, FlatList, TouchableOpacity } from "react-native";
-import { NavigationContainer } from "@react-navigation/native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { getPosts } from "./Weeks/Week 8/Axios";
-import Forms from "./Weeks/Week 8/Forms";
+import React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createDrawerNavigator } from '@react-navigation/drawer';
 
-const Stack = createNativeStackNavigator();
+import Weeks from './Screens/Weeks';
+import Week2 from './Screens/Week2';
+import Week3 from './Screens/Week3';
+import Week4 from './Screens/Week4';
+import Week5 from './Screens/Week5';
+import Week6 from './Screens/Week6';
+import Week7 from './Screens/Week7';
+import Week8 from './Screens/Week8';
 
-const HomeScreen = ({ navigation }) => {
-  const [posts, setPosts] = useState([]);
-
-  useEffect(() => {
-    fetchPosts();
-  }, []);
-
-  const fetchPosts = () => {
-    getPosts()
-      .then((res) => {
-        if (res.status === 200) {
-          setPosts(res.data);
-        }
-      })
-      .catch((err) => {
-        console.error("Failed to fetch posts:", err);
-      });
-  };
-
-  const renderItem = ({ item }) => (
-    <TouchableOpacity
-      style={styles.card}
-      onPress={() => navigation.navigate("Forms", { post: item, refresh: fetchPosts })}
-    >
-      <Text style={styles.title}>{item.title}</Text>
-      <Text>{item.body}</Text>
-    </TouchableOpacity>
-  );
-
-  return (
-    <View style={styles.container}>
-      <Text style={styles.header}>Daftar Posts</Text>
-      <FlatList
-        data={posts}
-        keyExtractor={(item) => item.id.toString()}
-        renderItem={renderItem}
-      />
-    </View>
-  );
-};
+const Drawer = createDrawerNavigator();
 
 export default function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Home">
-        <Stack.Screen name="Home" component={HomeScreen} />
-        <Stack.Screen name="Forms" component={Forms} />
-      </Stack.Navigator>
+      <Drawer.Navigator initialRouteName="Home Screen">
+        <Drawer.Screen name="Home Screen" component={Weeks} />
+        <Drawer.Screen name="Week 2 - Profile Screen" component={Week2} />
+        <Drawer.Screen name="Week 3" component={Week3} />
+        <Drawer.Screen name="Week 4 - Cards & useRef" component={Week4} />
+        <Drawer.Screen name="Week 5 - Drawer Home/Profile" component={Week5} />
+        <Drawer.Screen name="Week 6 - Input Form" component={Week6} />
+        <Drawer.Screen name="Week 7 - Meet7 Lat1" component={Week7} />
+        <Drawer.Screen name="Week 8 - Axios & Forms" component={Week8} />
+      </Drawer.Navigator>
     </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    padding: 16,
-  },
-  header: {
-    fontSize: 24,
-    marginBottom: 16,
-  },
-  card: {
-    backgroundColor: "#f9f9f9",
-    padding: 16,
-    marginBottom: 12,
-    borderRadius: 8,
-    elevation: 2,
-  },
-  title: {
-    fontWeight: "bold",
-    marginBottom: 8,
-  },
-});
