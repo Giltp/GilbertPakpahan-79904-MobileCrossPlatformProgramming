@@ -4,7 +4,6 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { getPosts } from '../Weeks/Week 8/Axios';
 import Forms from '../Weeks/Week 8/Forms';
-import Meet10_Maps from '../Weeks/Week 10/Meet10_Maps';
 
 const Stack = createNativeStackNavigator();
 
@@ -27,10 +26,21 @@ const PostListScreen = ({ navigation }) => {
       });
   };
 
+  const updatePostInState = (updatedPost) => {
+    setPosts((prevPosts) =>
+      prevPosts.map((p) => (p.id === updatedPost.id ? updatedPost : p))
+    );
+  };
+
   const renderItem = ({ item }) => (
     <TouchableOpacity
       style={styles.card}
-      onPress={() => navigation.navigate('Forms', { post: item, refresh: fetchPosts })}
+      onPress={() =>
+        navigation.navigate('Forms', {
+          post: item,
+          refresh: updatePostInState,
+        })
+      }
     >
       <Text style={styles.title}>{item.title}</Text>
       <Text>{item.body}</Text>
@@ -51,13 +61,10 @@ const PostListScreen = ({ navigation }) => {
 
 export default function Week8() {
   return (
-    <NavigationContainer independent={true}>
       <Stack.Navigator initialRouteName="Home">
         <Stack.Screen name="Home" component={PostListScreen} />
         <Stack.Screen name="Forms" component={Forms} />
-        <Stack.Screen name="Maps" component={Meet10_Maps} />
       </Stack.Navigator>
-    </NavigationContainer>
   );
 }
 

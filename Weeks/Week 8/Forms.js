@@ -16,7 +16,7 @@ const Forms = ({ route, navigation }) => {
             {
               text: "OK",
               onPress: () => {
-                refresh(); // Refresh posts in HomeScreen
+                refresh(updatedData); // Simulasikan update lokal
                 navigation.goBack();
               },
             },

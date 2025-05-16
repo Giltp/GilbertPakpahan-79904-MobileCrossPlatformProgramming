@@ -9,12 +9,10 @@ const Drawer = createDrawerNavigator();
 
 export default function Week7() {
   return (
-    <NavigationContainer independent={true}>
       <Drawer.Navigator>
         <Drawer.Screen name="Home" component={HomeScreen} />
         <Drawer.Screen name="Meet 7 - Latihan 1" component={Meet7_latih1} />
       </Drawer.Navigator>
-    </NavigationContainer>
   );
 }
 

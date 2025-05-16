@@ -10,6 +10,7 @@ import Week5 from './Screens/Week5';
 import Week6 from './Screens/Week6';
 import Week7 from './Screens/Week7';
 import Week8 from './Screens/Week8';
+import Week9 from './Screens/Week9';
 
 const Drawer = createDrawerNavigator();
 
@@ -25,6 +26,7 @@ export default function App() {
         <Drawer.Screen name="Week 6 - Input Form" component={Week6} />
         <Drawer.Screen name="Week 7 - Meet7 Lat1" component={Week7} />
         <Drawer.Screen name="Week 8 - Axios & Forms" component={Week8} />
+        <Drawer.Screen name="Week 9 - Camera" component={Week9} />
       </Drawer.Navigator>
     </NavigationContainer>
   );
